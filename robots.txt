@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sonkr0403.kr/sitemap.xml
