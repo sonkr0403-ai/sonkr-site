@@ -159,6 +159,17 @@ a.rcard:hover{transform:translateY(-4px);box-shadow:0 18px 30px -20px rgba(10,50
 .rcard.blogcard p{margin:0;font-size:16px;opacity:.9}
 .row2{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
 .rcard.blogcard .btn.line{color:#fff}
+.newposts{margin-top:36px}
+.subh{font-size:22px;margin-bottom:14px}
+.ncards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media(max-width:960px){.ncards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.ncards{grid-template-columns:minmax(0,1fr)}}
+.ncard{display:flex;flex-direction:column;gap:10px;background:var(--sky);border-radius:16px;padding:18px 20px;text-decoration:none;min-height:130px;transition:transform .2s}
+.ncard:hover{transform:translateY(-3px)}
+.ncard .d{font-size:15px;color:var(--mute)}
+.ncard b{font-size:17px;line-height:1.45}
+.ncard .more{margin-top:auto;font-size:15px;color:var(--mute)}
+.vid .thumb{display:block;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--sky);margin-bottom:4px}
+.vid .thumb img{width:100%;height:100%;object-fit:cover;display:block}
 /* faq */
 .faq{max-width:860px}
 details{border-bottom:1px solid var(--line)}
@@ -310,11 +321,16 @@ footer{padding:24px max(5vw,16px);font-size:15px;color:var(--mute);text-align:ce
       <a data-r class="rcard" href="https://blog.naver.com/sonkr0403/224361997406" target="_blank" rel="noopener"><span class="chip">편입</span><b>학점은행제로 편입 준비한 실제 과정, 합격까지 함께한 이야기</b><span class="more">블로그에서 읽기 ↗</span></a>
       <a data-r class="rcard" href="https://blog.naver.com/sonkr0403/224353480946" target="_blank" rel="noopener"><span class="chip">군 복무</span><b>군 복무 중 학점은행제, 처음부터 학위 취득까지 함께했습니다</b><span class="more">블로그에서 읽기 ↗</span></a>
       <a data-r class="rcard" href="https://blog.naver.com/sonkr0403/224338290903" target="_blank" rel="noopener"><span class="chip">미용학</span><b>학점은행제 미용학 수강부터 취득까지 함께한 이야기</b><span class="more">블로그에서 읽기 ↗</span></a>
-      <div data-r class="rcard blogcard">
+      <div data-r class="rcard blogcard" id="blogStrip">
         <b>더 많은 이야기는 블로그에서</b>
         <p>편입, 보육교사, 미용학, 군 복무 중 학위까지 상담 과정과 준비 방법을 꾸준히 정리하고 있어요.</p>
         <div class="row2"><a class="btn main" href="https://blog.naver.com/sonkr0403" target="_blank" rel="noopener">블로그 바로가기</a><a class="btn line" href="https://www.instagram.com/sonkr_0403/" target="_blank" rel="noopener">인스타그램</a></div>
       </div>
+    </div>
+    <div class="newposts" id="blogNew" hidden>
+      <h3 class="subh">블로그 새 글</h3>
+      <div class="ncards"></div>
+      <div class="row2" style="margin-top:18px"><a class="btn main" href="https://blog.naver.com/sonkr0403" target="_blank" rel="noopener">블로그 전체 보기</a><a class="btn line" href="https://www.instagram.com/sonkr_0403/" target="_blank" rel="noopener">인스타그램</a></div>
     </div>
   </div>
 </section>
@@ -376,6 +392,21 @@ footer{padding:24px max(5vw,16px);font-size:15px;color:var(--mute);text-align:ce
     els.forEach((el,i)=>{el.style.transitionDelay=(i%3)*80+'ms';io.observe(el)});
   } else els.forEach(el=>el.classList.add('in'));
 
+
+  // 블로그 새 글·유튜브 최신 영상: data/feed.json (GitHub Actions가 매일 갱신)
+  const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  fetch('data/feed.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(f=>{
+    if(!f)return;
+    if(f.blog&&f.blog.length){
+      const box=document.getElementById('blogNew');
+      box.querySelector('.ncards').innerHTML=f.blog.map(b=>`<a class="ncard" href="${esc(b.url)}" target="_blank" rel="noopener"><span class="d">${esc(b.date)}</span><b>${esc(b.title)}</b><span class="more">블로그에서 읽기 ↗</span></a>`).join('');
+      box.hidden=false;
+      const strip=document.getElementById('blogStrip');if(strip)strip.remove();
+    }
+    if(f.youtube&&f.youtube.length){
+      document.querySelector('.vids').innerHTML=f.youtube.map(v=>`<a class="vid in" href="https://www.youtube.com/watch?v=${esc(v.id)}" target="_blank" rel="noopener"><span class="thumb"><img src="https://i.ytimg.com/vi/${esc(v.id)}/mqdefault.jpg" alt="" loading="lazy"></span><span class="tag">${esc(v.date)}</span><b>${esc(v.title)}</b></a>`).join('');
+    }
+  }).catch(()=>{});
   // 카카오톡 채널 주소를 아래 따옴표 안에 넣으면 모든 카카오톡 버튼이 연결됩니다. 예: https://pf.kakao.com/_xxxxx
   const KAKAO_URL = 'https://open.kakao.com/o/su1qPkUd';
   for (const a of document.querySelectorAll('.kakao')) {
