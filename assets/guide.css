@@ -74,4 +74,4 @@ details p{color:var(--mute)}
 footer{padding:24px max(5vw,16px) 96px;font-size:14px;color:var(--mute);text-align:center}
 footer a{color:var(--mute)}
 .mbar{display:none}
-@media(max-width:760px){.navlink{display:none}.mbar{display:flex;position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:9;min-height:54px;box-shadow:0 10px 24px -8px rgba(0,0,0,.35)}}
+@media(max-width:760px){.navlink{display:none}.brand small{display:none}.mbar{display:flex;position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:9;min-height:54px;box-shadow:0 10px 24px -8px rgba(0,0,0,.35)}}
