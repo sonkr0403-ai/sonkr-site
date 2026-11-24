@@ -7,7 +7,7 @@ import json
 import re
 import urllib.request
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 
@@ -20,6 +20,9 @@ YT_RSS = f"https://www.youtube.com/feeds/videos.xml?channel_id={YT_CHANNEL}"
 FIXED_REVIEWS = {"224389454887", "224361997406", "224353480946", "224338290903"}
 
 BLOG_COUNT = 4
+# 블로그와 유튜브에 같은 주제를 함께 올리므로, 블로그 칸은 올린 지 7일이 지난 글부터 보여 줍니다.
+# (최근 1주일 주제는 유튜브 칸에서 보이고, 블로그 칸과 겹치지 않게)
+BLOG_DELAY_DAYS = 7
 YT_COUNT = 3
 OUT = Path(__file__).resolve().parent.parent / "data" / "feed.json"
 
@@ -32,6 +35,7 @@ def get(url):
 
 def blog_items():
     root = ET.fromstring(get(BLOG_RSS))
+    cutoff = datetime.now(timezone.utc) - timedelta(days=BLOG_DELAY_DAYS)
     items = []
     for it in root.iter("item"):
         link = (it.findtext("link") or "").strip()
@@ -40,9 +44,12 @@ def blog_items():
             continue
         log_no = m.group(1)
         try:
-            date = parsedate_to_datetime(it.findtext("pubDate") or "").strftime("%Y.%m.%d")
+            posted = parsedate_to_datetime(it.findtext("pubDate") or "")
         except (TypeError, ValueError):
-            date = ""
+            continue
+        if posted > cutoff:
+            continue
+        date = posted.strftime("%Y.%m.%d")
         items.append({
             "title": (it.findtext("title") or "").strip(),
             "url": f"https://blog.naver.com/{BLOG_ID}/{log_no}",
