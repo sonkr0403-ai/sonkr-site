@@ -1,6 +1,12 @@
 {
   "blog": [
     {
+      "title": "학점은행제로 간호대 입학하는 2가지 방법",
+      "url": "https://blog.naver.com/sonkr0403/224482118848",
+      "date": "2026.11.18",
+      "category": "편입 및 대졸자전형"
+    },
+    {
       "title": "학점은행제 기간 줄이는 게 이득일까?",
       "url": "https://blog.naver.com/sonkr0403/224480762455",
       "date": "2026.11.17",
@@ -11,12 +17,6 @@
       "url": "https://blog.naver.com/sonkr0403/224474340612",
       "date": "2026.11.12",
       "category": "편입 및 대졸자전형"
-    },
-    {
-      "title": "이것만 알면 학점은행제 하는 법 어렵지 않습니다",
-      "url": "https://blog.naver.com/sonkr0403/224473191320",
-      "date": "2026.11.11",
-      "category": "학점은행제 활용"
     }
   ],
   "youtube": [
@@ -36,5 +36,5 @@
       "date": "2026.11.19"
     }
   ],
-  "updated": "2026-11-24T08:37Z"
+  "updated": "2026-11-25T22:16Z"
 }
