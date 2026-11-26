@@ -427,7 +427,6 @@ footer{padding:24px max(5vw,16px);font-size:15px;color:var(--mute);text-align:ce
   </div>
 </section>
 </main>
-<a class="btn main kakao mbar" href="#contact" aria-label="카카오톡으로 상담하기">카톡 상담</a>
 <footer>© 소니의 학습나침반 · 학점은행제 교육 컨설팅<br><a href="https://www.instagram.com/sonkr_0403/" target="_blank" rel="noopener">Instagram</a> · <a href="https://blog.naver.com/sonkr0403" target="_blank" rel="noopener">Blog</a> · <a href="https://www.youtube.com/@sonkr0403" target="_blank" rel="noopener">YouTube</a></footer>
 
 <script>
@@ -455,9 +454,6 @@ footer{padding:24px max(5vw,16px);font-size:15px;color:var(--mute);text-align:ce
     }
   }).catch(()=>{});
 
-  // 휴대폰 카카오톡 버튼: 상담 칸이 화면에 보이면 잠깐 숨김
-  {const fab=document.querySelector('.mbar'),box=document.querySelector('#contact');
-   if(fab&&box&&'IntersectionObserver' in window){new IntersectionObserver(es=>fab.classList.toggle('off',es[0].isIntersecting),{threshold:.15}).observe(box)}}
   // 카카오톡 채널 주소를 아래 따옴표 안에 넣으면 모든 카카오톡 버튼이 연결됩니다. 예: https://pf.kakao.com/_xxxxx
   const KAKAO_URL = 'https://open.kakao.com/o/su1qPkUd';
   for (const a of document.querySelectorAll('.kakao')) {
