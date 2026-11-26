@@ -30,7 +30,7 @@ def main():
         if START in html:
             html = re.sub(re.escape(START) + r".*?" + re.escape(END), lambda _: block, html, flags=re.S)
         else:
-            html = html.replace('  <section class="cta">', block + '\n\n  <section class="cta">', 1)
+            html = html.replace('</main>', '  ' + block + '\n</main>', 1)
         page.write_text(html, encoding="utf-8")
         print("updated", slug)
 
