@@ -65,8 +65,16 @@ details p{color:var(--mute)}
 .cta p{opacity:.9}
 .cta .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .cta .btn.line{color:#fff}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-@media(max-width:600px){.cards{grid-template-columns:minmax(0,1fr)}}
+.cards{display:flex;flex-direction:column;gap:12px}
+/* 목록형: 줄 전체가 눌리고, 오른쪽 화살표로 이동을 알려 줌 */
+.cards .gcard{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"chip title" ". desc";column-gap:14px;row-gap:4px;align-items:center;min-height:92px;padding:20px 64px 20px 22px;transition:border-color .15s,background .15s,transform .15s}
+.cards .gcard .chip{grid-area:chip;align-self:center;white-space:nowrap}
+.cards .gcard b{grid-area:title;font-size:19px}
+.cards .gcard span.d{grid-area:desc}
+.cards .gcard::after{content:"";position:absolute;right:24px;top:50%;width:11px;height:11px;border-top:2.5px solid var(--blue);border-right:2.5px solid var(--blue);transform:translateY(-50%) rotate(45deg)}
+.cards .gcard:hover{border-color:var(--blue);background:var(--sky)}
+.cards .gcard:active{transform:scale(.99)}
+@media(max-width:600px){.cards .gcard{grid-template-columns:minmax(0,1fr);grid-template-areas:"chip" "title" "desc";padding:18px 52px 18px 18px}.cards .gcard::after{right:20px}}
 .gcard{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;text-decoration:none;color:var(--ink)}
 .gcard .chip{align-self:flex-start;font-size:14px;font-weight:700;color:var(--blue);background:var(--sky);padding:3px 11px;border-radius:999px}
 .gcard b{font-size:19px;line-height:1.45}
