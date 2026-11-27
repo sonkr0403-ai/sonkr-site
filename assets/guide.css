@@ -87,3 +87,64 @@ footer a{color:var(--mute)}
 .btn.kakao,a.btn[href*="open.kakao.com"]{background:#FEE500;color:#191919;border-color:#FEE500}.btn.kakao::before,a.btn[href*="open.kakao.com"]::before{content:"";width:20px;height:20px;flex:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%233A1D1D' d='M16 6C9.4 6 4 10.2 4 15.4c0 3.3 2.2 6.2 5.6 7.9l-1.2 4.4c-.1.4.3.7.7.5l5.2-3.4c.6.1 1.1.1 1.7.1 6.6 0 12-4.2 12-9.4S22.6 6 16 6z'/%3E%3C/svg%3E") center/contain no-repeat}
 @media(max-width:760px){.mbar{display:inline-flex;position:fixed;right:16px;left:auto;bottom:max(16px,env(safe-area-inset-bottom));z-index:9;width:auto;height:52px;min-height:0;padding:0 18px 0 14px;gap:8px;border-radius:999px;font-size:16px;box-shadow:0 8px 20px -6px rgba(0,0,0,.4);transition:opacity .25s,transform .25s}.mbar.off{opacity:0;transform:translateY(12px);pointer-events:none}}
 @media(max-width:760px){.navlink{display:none}.brand small{display:none}}
+
+/* 입시 정보: 학교별 블록과 지원 가능 표시 */
+.school{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;margin:0 0 16px;scroll-margin-top:84px}
+.school h3{margin:0 0 4px!important;font-size:22px}
+.school .loc{font-size:14px;color:var(--mute);margin-bottom:12px}
+.school dl{display:grid;grid-template-columns:76px minmax(0,1fr);gap:8px 14px;margin:0}
+.school dt{font-weight:700;color:var(--blue)}
+.school dd{margin:0}
+.school .src{font-size:13px;color:var(--mute);margin:12px 0 0}
+.school .src a{color:var(--mute)}
+.tag{display:inline-block;font-size:13px;font-weight:700;padding:1px 9px;border-radius:999px;margin-right:6px;white-space:nowrap}
+.tag.ok{background:#e3f4e6;color:#1d6b2f}.tag.no{background:#fdecea;color:#a12a1f}.tag.chk{background:#fff3d6;color:#7a5200}
+@media(prefers-color-scheme:dark){.tag.ok{background:#1d3b24;color:#9fe0ad}.tag.no{background:#3d1d1a;color:#f3a69c}.tag.chk{background:#3b2f12;color:#f2cf83}}
+@media(max-width:600px){.school dl{grid-template-columns:minmax(0,1fr)}.school dt{margin-top:6px}}
+.soon{color:var(--mute);font-size:15px}
+
+/* 입시 정보 v2: 상황별 묶음 + 짧은 학교 카드 */
+.pick{display:grid;gap:12px;margin:0 0 8px}
+.pick .row{display:grid;grid-template-columns:170px minmax(0,1fr);gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px}
+.pick .row b{font-size:17px}
+.pick .row span{color:var(--ink)}
+@media(max-width:600px){.pick .row{grid-template-columns:minmax(0,1fr);gap:4px}}
+.grp{margin:44px 0 0}
+.grp h2{margin:0 0 6px!important}
+.grp .lead{color:var(--mute);font-size:16px;margin-bottom:16px}
+.sgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(max-width:700px){.sgrid{grid-template-columns:minmax(0,1fr)}}
+.sc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;scroll-margin-top:84px}
+.sc h3{margin:0!important;font-size:21px}
+.sc .loc{font-size:14px;color:var(--mute);margin:2px 0 12px}
+.sc ul{list-style:none;padding:0;margin:0}
+.sc li{display:grid;grid-template-columns:42px minmax(0,1fr);gap:8px;padding:7px 0;border-top:1px solid var(--line);font-size:16px;line-height:1.55;margin:0}
+.sc li i{font-style:normal;font-weight:700;color:var(--blue)}
+.sc .tip{font-size:14px;color:#8a4b00;background:#fff3d6;border-radius:10px;padding:8px 12px;margin-top:10px;line-height:1.55}
+@media(prefers-color-scheme:dark){.sc .tip{background:#3b2f12;color:#f2cf83}}
+.srcs{font-size:13px;color:var(--mute);line-height:1.9}
+.srcs a{color:var(--mute)}
+
+/* 지역 필터 */
+.rfilter{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px}
+.rfilter button{font:inherit;font-size:16px;font-weight:700;min-height:44px;padding:0 20px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.rfilter button small{font-weight:500;color:var(--mute);margin-left:2px}
+.rfilter button[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff}
+.rfilter button[aria-pressed=true] small{color:#dff1ee}
+.rfilter button:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.rlist{font-size:15px;color:var(--mute);min-height:1em;margin:6px 0 0}
+.sc[hidden],.grp[hidden]{display:none}
+
+/* 학교 카드 하단 특징 */
+.sc .feat{margin-top:12px;background:var(--sky);border-radius:12px;padding:10px 14px}
+.sc .feat b{display:block;font-size:14px;color:var(--blue);margin-bottom:2px}
+.sc .feat ul{list-style:disc;padding-left:18px;margin:0}
+.sc .feat li{display:list-item;grid-template-columns:none;border:0;padding:2px 0;font-size:15px}
+
+/* 학과 탭 */
+.dtabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:2px solid var(--line);margin:0 0 16px}
+.dtabs a,.dtabs .off{display:inline-flex;align-items:center;gap:6px;min-height:46px;padding:0 16px;font-size:17px;font-weight:700;text-decoration:none;color:var(--mute);border-bottom:3px solid transparent;margin-bottom:-2px}
+.dtabs a[aria-current=page]{color:var(--blue);border-bottom-color:var(--blue)}
+.dtabs .off{opacity:.55;cursor:default;font-weight:500}
+.dtabs .off small{font-size:12px;background:var(--sky);border-radius:999px;padding:1px 8px}
+.grp:first-of-type{margin-top:20px}
