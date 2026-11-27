@@ -148,3 +148,6 @@ footer a{color:var(--mute)}
 .dtabs .off{opacity:.55;cursor:default;font-weight:500}
 .dtabs .off small{font-size:12px;background:var(--sky);border-radius:999px;padding:1px 8px}
 .grp:first-of-type{margin-top:20px}
+/* 학과 탭이 늘어나면 모바일에서 가로로 밀어서 보기 */
+@media(max-width:600px){.dtabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.dtabs::-webkit-scrollbar{display:none}.dtabs a,.dtabs .off{white-space:nowrap;flex:none;padding:0 12px}}
+.dtabs+article .rfilter,.dtabs~article .rfilter{margin-top:4px}
