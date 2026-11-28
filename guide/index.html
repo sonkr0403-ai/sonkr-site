@@ -63,7 +63,7 @@
            ['transfer',/편입|대졸자|간호|물리치료|방사선|임상병리|치위생|작업치료|응급구조|보건/],
            ['license',/사회복지|보육|청소년|평생교육|자격증/],
            ['degree',/학점은행제|학력|학사|대학원|고졸/]];
-  var LIMIT=10,cards=[].slice.call(document.querySelectorAll('#guides .gcard')),btns=document.querySelectorAll('.gtabs button'),more=document.getElementById('gmore'),cur='all',open=false;
+  var LIMIT=5,cards=[].slice.call(document.querySelectorAll('#guides .gcard')),btns=document.querySelectorAll('.gtabs button'),more=document.getElementById('gmore'),cur='all',open=false;
   cards.forEach(function(c){var t=(c.querySelector('.chip')||{}).textContent||'';c.dataset.cat='etc';for(var i=0;i<MAP.length;i++){if(MAP[i][1].test(t)){c.dataset.cat=MAP[i][0];break}}});
   btns.forEach(function(b){if(b.dataset.c==='all')return;var n=cards.filter(function(c){return c.dataset.cat===b.dataset.c}).length;if(!n){b.hidden=true}else{b.insertAdjacentHTML('beforeend',' <small>'+n+'</small>')}});
   btns[0].insertAdjacentHTML('beforeend',' <small>'+cards.length+'</small>');
@@ -71,6 +71,7 @@
     cards.forEach(function(x){x.hidden=true});
     list.forEach(function(x,i){x.hidden=!(open||c!=='all'||i<LIMIT)});
     more.parentNode.hidden=!(c==='all'&&!open&&list.length>LIMIT);
+    more.textContent='가이드 더 보기 (+'+Math.max(list.length-LIMIT,0)+')';
     btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.c===c?'true':'false')});}
   btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.c);history.replaceState(null,'',b.dataset.c==='all'?location.pathname:'#'+b.dataset.c)})});
   more.addEventListener('click',function(){open=true;show(cur)});
