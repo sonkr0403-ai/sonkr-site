@@ -31,11 +31,10 @@
 
   <div class="rfilter gtabs" role="group" aria-label="분야 선택">
     <button type="button" data-c="all" aria-pressed="true">전체</button>
-    <button type="button" data-c="health" aria-pressed="false">간호·보건</button>
-    <button type="button" data-c="transfer" aria-pressed="false">편입·학력</button>
-    <button type="button" data-c="welfare" aria-pressed="false">사회복지·보육</button>
+    <button type="button" data-c="transfer" aria-pressed="false">편입·대졸자전형</button>
+    <button type="button" data-c="degree" aria-pressed="false">학력 개선</button>
     <button type="button" data-c="license" aria-pressed="false">자격증</button>
-    <button type="button" data-c="basic" aria-pressed="false">학점은행제 기초</button>
+    <button type="button" data-c="tech" aria-pressed="false">산업기사·기사</button>
   </div>
 
   <!-- 새 가이드는 이 목록 맨 위에 추가합니다 -->
@@ -60,11 +59,10 @@
 <script>
 /* 분야 탭: 카드의 분류 이름(chip)으로 분야를 정해요. 새 분야 이름이 생기면 아래 목록에 추가하세요. */
 (function(){
-  var MAP=[['health',/간호|물리치료|방사선|임상병리|치위생|작업치료|응급구조|보건/],
-           ['transfer',/편입|학력|학사|대학원/],
-           ['welfare',/사회복지|보육|청소년|평생교육/],
-           ['license',/산업기사|기사|기능사|자격증/],
-           ['basic',/학점은행제/]];
+  var MAP=[['tech',/산업기사|기사|기능사/],
+           ['transfer',/편입|대졸자|간호|물리치료|방사선|임상병리|치위생|작업치료|응급구조|보건/],
+           ['license',/사회복지|보육|청소년|평생교육|자격증/],
+           ['degree',/학점은행제|학력|학사|대학원|고졸/]];
   var LIMIT=10,cards=[].slice.call(document.querySelectorAll('#guides .gcard')),btns=document.querySelectorAll('.gtabs button'),more=document.getElementById('gmore'),cur='all',open=false;
   cards.forEach(function(c){var t=(c.querySelector('.chip')||{}).textContent||'';c.dataset.cat='etc';for(var i=0;i<MAP.length;i++){if(MAP[i][1].test(t)){c.dataset.cat=MAP[i][0];break}}});
   btns.forEach(function(b){if(b.dataset.c==='all')return;var n=cards.filter(function(c){return c.dataset.cat===b.dataset.c}).length;if(!n){b.hidden=true}else{b.insertAdjacentHTML('beforeend',' <small>'+n+'</small>')}});
