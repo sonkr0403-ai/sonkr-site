@@ -29,6 +29,15 @@
   <h1>학습 가이드</h1>
   <p class="meta">학점은행제로 갈 수 있는 길을 주제별로 정리했어요.</p>
 
+  <div class="rfilter gtabs" role="group" aria-label="분야 선택">
+    <button type="button" data-c="all" aria-pressed="true">전체</button>
+    <button type="button" data-c="health" aria-pressed="false">간호·보건</button>
+    <button type="button" data-c="transfer" aria-pressed="false">편입·학력</button>
+    <button type="button" data-c="welfare" aria-pressed="false">사회복지·보육</button>
+    <button type="button" data-c="license" aria-pressed="false">자격증</button>
+    <button type="button" data-c="basic" aria-pressed="false">학점은행제 기초</button>
+  </div>
+
   <!-- 새 가이드는 이 목록 맨 위에 추가합니다 -->
   <div class="cards" id="guides">
     <a class="gcard" href="/guide/nursing-graduate-track/"><span class="chip">간호학과</span><b>간호대 대졸자전형, 고졸 또는 직장인은 못할까?</b><span class="d">지원 자격·성적 확인, 직장 병행 학점은행제 준비</span></a>
@@ -38,6 +47,7 @@
     <a class="gcard" href="/guide/construction-safety/"><span class="chip">산업기사</span><b>건설안전산업기사 응시자격 빠르게 갖추는 방법</b><span class="d">고졸·비전공자 응시자격, 학력별 진행 과정과 기간</span></a>
     <a class="gcard" href="/guide/nursing-admission/"><span class="chip">간호학과</span><b>학점은행제로 간호대 입학하는 2가지 방법</b><span class="d">일반편입·학사편입·대졸자전형 비교, 준비 기간과 과정</span></a>
   </div>
+  <p class="gmore"><button type="button" id="gmore">더 보기</button></p>
 
   <section class="cta">
     <h2>내 상황에 맞는 길이 궁금하다면</h2>
@@ -47,5 +57,27 @@
 </main>
 
 <footer>© 소니의 학습나침반 · 학점은행제 교육 컨설팅<br><a href="/">홈</a> · <a href="https://blog.naver.com/sonkr0403" target="_blank" rel="noopener">Blog</a> · <a href="https://www.youtube.com/@sonkr0403" target="_blank" rel="noopener">YouTube</a></footer>
+<script>
+/* 분야 탭: 카드의 분류 이름(chip)으로 분야를 정해요. 새 분야 이름이 생기면 아래 목록에 추가하세요. */
+(function(){
+  var MAP=[['health',/간호|물리치료|방사선|임상병리|치위생|작업치료|응급구조|보건/],
+           ['transfer',/편입|학력|학사|대학원/],
+           ['welfare',/사회복지|보육|청소년|평생교육/],
+           ['license',/산업기사|기사|기능사|자격증/],
+           ['basic',/학점은행제/]];
+  var LIMIT=10,cards=[].slice.call(document.querySelectorAll('#guides .gcard')),btns=document.querySelectorAll('.gtabs button'),more=document.getElementById('gmore'),cur='all',open=false;
+  cards.forEach(function(c){var t=(c.querySelector('.chip')||{}).textContent||'';c.dataset.cat='etc';for(var i=0;i<MAP.length;i++){if(MAP[i][1].test(t)){c.dataset.cat=MAP[i][0];break}}});
+  btns.forEach(function(b){if(b.dataset.c==='all')return;var n=cards.filter(function(c){return c.dataset.cat===b.dataset.c}).length;if(!n){b.hidden=true}else{b.insertAdjacentHTML('beforeend',' <small>'+n+'</small>')}});
+  btns[0].insertAdjacentHTML('beforeend',' <small>'+cards.length+'</small>');
+  function show(c){cur=c;var list=cards.filter(function(x){return c==='all'||x.dataset.cat===c});
+    cards.forEach(function(x){x.hidden=true});
+    list.forEach(function(x,i){x.hidden=!(open||c!=='all'||i<LIMIT)});
+    more.parentNode.hidden=!(c==='all'&&!open&&list.length>LIMIT);
+    btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.c===c?'true':'false')});}
+  btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.c);history.replaceState(null,'',b.dataset.c==='all'?location.pathname:'#'+b.dataset.c)})});
+  more.addEventListener('click',function(){open=true;show(cur)});
+  var h=location.hash.slice(1);show([].some.call(btns,function(b){return b.dataset.c===h&&!b.hidden})?h:'all');
+})();
+</script>
 </body>
 </html>

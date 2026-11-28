@@ -151,3 +151,12 @@ footer a{color:var(--mute)}
 /* 학과 탭이 늘어나면 모바일에서 가로로 밀어서 보기 */
 @media(max-width:600px){.dtabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}.dtabs::-webkit-scrollbar{display:none}.dtabs a,.dtabs .off{white-space:nowrap;flex:none;padding:0 12px}}
 .dtabs+article .rfilter,.dtabs~article .rfilter{margin-top:4px}
+
+/* 학습 가이드 분야 탭 */
+.gtabs{margin:4px 0 18px}
+@media(max-width:600px){.gtabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}.gtabs::-webkit-scrollbar{display:none}.gtabs button{flex:none;white-space:nowrap}}
+.cards .gcard[hidden],.gtabs button[hidden],.gmore[hidden]{display:none}
+.gmore{text-align:center;margin:18px 0 0}
+.gmore button{font:inherit;font-size:16px;font-weight:700;min-height:46px;padding:0 28px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.gmore button:hover{border-color:var(--blue)}
+@media(max-width:600px){.cards .gcard .chip{justify-self:start}}
