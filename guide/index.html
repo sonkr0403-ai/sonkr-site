@@ -65,8 +65,7 @@
            ['degree',/학점은행제|학력|학사|대학원|고졸/]];
   var LIMIT=5,cards=[].slice.call(document.querySelectorAll('#guides .gcard')),btns=document.querySelectorAll('.gtabs button'),more=document.getElementById('gmore'),cur='all',open=false;
   cards.forEach(function(c){var t=(c.querySelector('.chip')||{}).textContent||'';c.dataset.cat='etc';for(var i=0;i<MAP.length;i++){if(MAP[i][1].test(t)){c.dataset.cat=MAP[i][0];break}}});
-  btns.forEach(function(b){if(b.dataset.c==='all')return;var n=cards.filter(function(c){return c.dataset.cat===b.dataset.c}).length;if(!n){b.hidden=true}else{b.insertAdjacentHTML('beforeend',' <small>'+n+'</small>')}});
-  btns[0].insertAdjacentHTML('beforeend',' <small>'+cards.length+'</small>');
+  btns.forEach(function(b){if(b.dataset.c==='all')return;var n=cards.filter(function(c){return c.dataset.cat===b.dataset.c}).length;if(!n){b.hidden=true}});
   function show(c){cur=c;var list=cards.filter(function(x){return c==='all'||x.dataset.cat===c});
     cards.forEach(function(x){x.hidden=true});
     list.forEach(function(x,i){x.hidden=!(open||c!=='all'||i<LIMIT)});
